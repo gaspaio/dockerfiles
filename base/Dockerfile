@@ -15,7 +15,7 @@ RUN rpm -Uvh http://pkgs.repoforge.org/rpmforge-release/rpmforge-release-0.5.3-1
 RUN yum upgrade -y
 
 # Base packages
-RUN yum install htop vim -y
+RUN yum install htop wget vim -y
 
 # Set vim as default editor
 RUN echo $'export VISUAL=\"vim\"\nexport EDITOR=\"vim\"' | tee /etc/profile.d/editor.sh
