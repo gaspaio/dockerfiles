@@ -1,6 +1,6 @@
 # Inspired by: Better config cf. https://github.com/zaiste/docker-postgresql
 
-FROM gaspaio:centos65
+FROM gaspaio/base-centos:latest
 MAINTAINER Rodolfo Ripado <ggaspaio@gmail.com>
 
 # Install PG 9.3
@@ -15,3 +15,4 @@ EXPOSE 5432
 
 # Start server
 CMD ["/bin/run"]
+
