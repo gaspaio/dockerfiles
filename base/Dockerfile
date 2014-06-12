@@ -20,4 +20,4 @@ RUN yum install htop wget vim -y
 # Set vim as default editor
 RUN echo $'export VISUAL=\"vim\"\nexport EDITOR=\"vim\"' | tee /etc/profile.d/editor.sh
 
-ENTRYPOINT ["/bin/bash"]
+CMD ["/bin/bash"]
