@@ -13,13 +13,14 @@ if [ ! -d $PG_DATADIR ]; then
     chown -R postgres:postgres $PG_DATADIR
     su - postgres -c "/usr/pgsql-9.3/bin/initdb -D $PG_DATADIR"
 
-    # Allow all logins from the brigde, using a password
-    echo "host    all             all             172.17.42.1/32            md5" >> $PG_DATADIR/pg_hba.conf
-    
+    # Allow all logins from the docker default brigded network, 
+    # using a password
+    echo "host    all             all             172.17.42.1/16            md5" >> $PG_DATADIR/pg_hba.conf
+ 
     # Listen for connections on all interfaces
     echo "listen_addresses='*'" >> $PG_DATADIR/postgresql.conf
 
-    # Set a password for postgres user to allow remote connections
+    # Set a (bogus) password for postgres user to allow remote connections
     su - postgres -c "$PG_BINDIR/postgres --single -D $PG_DATADIR" <<< "ALTER USER postgres with password 'password';"
 fi
 

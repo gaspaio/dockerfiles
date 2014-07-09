@@ -14,5 +14,5 @@ RUN chmod +x /bin/run
 EXPOSE 5432
 
 # Start server
-CMD ["/bin/run"]
+CMD ["/bin/bash", "-c", "/bin/run"]
 
