@@ -1,9 +1,18 @@
 
-FROM centos:latest
+FROM centos:centos6
 MAINTAINER Rodolfo Ripado <ggaspaio@gmail.com>
 
 # Set Europe/Paris localtime
 RUN ln -f -s /usr/share/zoneinfo/Europe/Paris /etc/localtime
+
+# Correct locale
+# The centos Docker basebox deletes loads of executables to save space, but we need localedef
+# We should problably re-remove them.
+# Cf. https://github.com/dotcloud/docker/blob/master/contrib/mkimage-yum.sh
+ENV LANG en_US.UTF-8
+RUN yum reinstall glibc-common
+RUN localedef -v -c -i en_US -f UTF-8 en_US.UTF-8
+
 
 # Extra package sources & update
 RUN rpm --import https://fedoraproject.org/static/0608B895.txt
